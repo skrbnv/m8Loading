@@ -1,0 +1,198 @@
+<html>
+
+<head>
+
+    <script>
+        let colorSchemes = {
+            'blue': {
+                '--bg-color': '#09b7ff',
+                '--text-color': '#fff',
+                '--button-bg': '#000000',
+                '--button-text': '#09b7ff',
+                '--shadow-color': 'rgba(255, 255, 255, 0.75)'
+            },
+            'black': {
+                '--bg-color': '#000000',
+                '--text-color': '#09b7ff',
+                '--button-bg': '#09b7ff',
+                '--button-text': '#000000',
+                '--shadow-color': 'rgba(9, 183, 255, 0.75)'
+            },
+        }
+
+        let currentScheme = 'blue';
+
+        function updateColorScheme() {
+            const root = document.documentElement;
+            const scheme = colorSchemes[currentScheme];
+
+            Object.keys(scheme).forEach(key => {
+                root.style.setProperty(key, scheme[key]);
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            updateColorScheme();
+        });
+
+        function changeColorScheme() {
+            currentScheme = currentScheme === 'blue' ? 'black' : 'blue';
+            updateColorScheme();
+        }
+    </script>
+
+</head>
+
+<body>
+    <div class="page" id="page">
+        <div class="loading">
+            <div class="loading-logo">
+                <div class="logo-container" style='width: 78px; height: 78px; display: inline-block;'>
+                    <svg {width} {height} viewBox="0 0 96.5 88.4" xmlns="http://www.w3.org/2000/svg"
+                        xmlns:xlink="http://www.w3.org/1999/xlink">
+                        <path class="avatar" fill="currentColor"
+                            d="M48.24,0C21.6,0,0,21.65,0,48.36c0,16.65,8.39,31.33,21.17,40.03,2.73-9.68,10.42-17.28,20.14-19.85-8.86-3.04-15.23-11.45-15.23-21.36,0-12.47,10.08-22.57,22.51-22.57s22.51,10.11,22.51,22.57c0,9.91-6.37,18.32-15.23,21.36,9.59,2.54,17.2,9.95,20.03,19.44,12.44-8.75,20.57-23.23,20.57-39.62C96.48,21.65,74.88,0,48.24,0" />
+                    </svg>
+                </div>
+                <span class="loader"></span>
+            </div>
+        </div>
+        <button id="change-color-scheme-button" onclick="changeColorScheme()">Switch</button>
+    </div>
+
+    <style>
+        .page {
+            background-color: var(--bg-color);
+            width: 100vw;
+            height: 100vh;
+        }
+
+        .logo-container {
+            color: var(--text-color);
+        }
+
+        .loading {
+            position: fixed;
+            left: 0;
+            top: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            width: 100vw;
+            z-index: 999;
+            box-sizing: border-box;
+            background-color: var(--color-m8-blue);
+
+            .loading-logo {
+                position: relative;
+                width: 98px;
+                height: 98px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+
+                :global(svg) {
+                    transform: translate(0, -3.5px);
+                    color: var(--text-color);
+                }
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        :root {
+            --loader-thickness: 5px;
+        }
+
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        .loader {
+            position: absolute;
+            left: 0;
+            top: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            opacity: 0.9;
+        }
+
+        .loader:before,
+        .loader:after {
+            content: '';
+            position: absolute;
+            border-radius: 50%;
+            animation: pulsOut 1.8s ease-in-out infinite;
+            filter: drop-shadow(0 0 var(--loader-thickness) var(--shadow-color));
+        }
+
+        .loader:before {
+            width: 100%;
+            padding-bottom: 100%;
+            box-shadow: inset 0 0 0 var(--loader-thickness) var(--text-color);
+            animation-name: pulsIn;
+        }
+
+        .loader:after {
+            width: calc(100% - 2 * var(--loader-thickness));
+            padding-bottom: calc(100% - 2 * var(--loader-thickness));
+            box-shadow: 0 0 0 0 var(--text-color);
+        }
+
+        @keyframes pulsIn {
+            0% {
+                box-shadow: inset 0 0 0 var(--loader-thickness) var(--text-color);
+                opacity: 1;
+            }
+
+            50%,
+            100% {
+                box-shadow: inset 0 0 0 0 var(--text-color);
+                opacity: 0;
+            }
+        }
+
+        @keyframes pulsOut {
+
+            0%,
+            50% {
+                box-shadow: 0 0 0 0 var(--text-color);
+                opacity: 0;
+            }
+
+            100% {
+                box-shadow: 0 0 0 var(--loader-thickness) var(--text-color);
+                opacity: 1;
+            }
+        }
+
+        #change-color-scheme-button {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 9999;
+            background-color: var(--button-bg);
+            color: var(--button-text);
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+
+</body>
+
+</html>
