@@ -1,6 +1,8 @@
 <html>
 
 <head>
+    <title>M8</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
     <script>
         let colorSchemes = {
@@ -47,8 +49,8 @@
     <div class="page" id="page">
         <div class="loading">
             <div class="loading-logo">
-                <div class="logo-container" style='width: 78px; height: 78px; display: inline-block;'>
-                    <svg {width} {height} viewBox="0 0 96.5 88.4" xmlns="http://www.w3.org/2000/svg"
+                <div class="logo-container">
+                    <svg width="78" height="78" viewBox="0 0 96.5 88.4" xmlns="http://www.w3.org/2000/svg"
                         xmlns:xlink="http://www.w3.org/1999/xlink">
                         <path class="avatar" fill="currentColor"
                             d="M48.24,0C21.6,0,0,21.65,0,48.36c0,16.65,8.39,31.33,21.17,40.03,2.73-9.68,10.42-17.28,20.14-19.85-8.86-3.04-15.23-11.45-15.23-21.36,0-12.47,10.08-22.57,22.51-22.57s22.51,10.11,22.51,22.57c0,9.91-6.37,18.32-15.23,21.36,9.59,2.54,17.2,9.95,20.03,19.44,12.44-8.75,20.57-23.23,20.57-39.62C96.48,21.65,74.88,0,48.24,0" />
@@ -69,6 +71,43 @@
 
         .logo-container {
             color: var(--text-color);
+            width: 78px;
+            height: 78px;
+            display: inline-block;
+        }
+
+        @media (max-width: 768px) {
+            .logo-container {
+                width: 60px;
+                height: 60px;
+            }
+
+            .logo-container svg {
+                width: 60px;
+                height: 60px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo-container {
+                width: 50px;
+                height: 50px;
+            }
+
+            .logo-container svg {
+                width: 50px;
+                height: 50px;
+            }
+
+            .loading-logo {
+                width: 70px;
+                height: 70px;
+            }
+
+            #change-color-scheme-button {
+                padding: 8px 16px;
+                font-size: 14px;
+            }
         }
 
         .loading {
